@@ -1,0 +1,33 @@
+<Context path="/${tomcat.webapp.path}" docBase="${tomcat.webapp.docbase}" useHttpOnly="true">
+
+    <Parameter name="java.naming.factory.initial" value="com.sun.jndi.ldap.LdapCtxFactory" override="true" />
+    <Parameter name="java.naming.provider.url" value="ldap://localhost:10389" override="true" />
+    
+    
+<!--     <Parameter name="java.naming.provider.url" value="ldaps://ldap.${env:SERVER_ENV}.${env:SERVER_SUFFIX}:636" override="true" /> -->
+<!-- 
+    <Parameter name="java.naming.security.authentication" value="EXTERNAL" override="true" />
+    <Parameter name="java.naming.security.protocol" value="ssl" override="true" />
+-->
+     <Parameter name="java.naming.security.authentication" value="simple" override="true" /> 
+    
+     <Parameter name="java.naming.security.principal" value="cn=Directory Manager" override="true" /> 
+	<Parameter name="java.naming.security.credentials" value="manager123" override="true" />
+    
+    
+    <Parameter name="net.deluxemt.portal.users.base" value="dc=deluxemt,dc=net" override="true" />
+    <Parameter name="net.deluxemt.portal.users.prefix" value="ou=People" override="true" />
+    <Parameter name="net.deluxemt.portal.users.filter" value="(objectClass=person)" override="true" />
+    <Parameter name="net.deluxemt.portal.admin.filter" value="cn=admin" override="true" />
+    <Parameter name="net.deluxemt.portal.roles.base" value="dc=deluxemt,dc=net" override="true" />
+    <Parameter name="net.deluxemt.portal.roles.filter" value="(objectClass=organizationalRole)" override="true" />
+
+    <Parameter name="net.deluxemt.portal.groups.base" value="dc=deluxemt,dc=net" override="true" />
+    <Parameter name="net.deluxemt.portal.groups.filter" value="(objectClass=groupOfUniqueNames)" override="true" />
+
+    <Parameter name="net.deluxemt.portal.users.cacheControl" value="no-cache" override="true" />
+    <Parameter name="net.deluxemt.portal.groups.cacheControl" value="no-cache" override="true" />
+    <Parameter name="net.deluxemt.portal.roles.cacheControl" value="no-cache" override="true" />
+
+</Context>
+
