@@ -1,0 +1,28 @@
+<Context docBase="${tomcat.webapp.docbase}" useHttpOnly="true">
+   <Parameter name="ravn.url" value="https://ravn-query1.${env:SERVER_ENV}.${env:SERVER_SUFFIX}/query/query"/>
+    <Parameter name="ravn.db" value="ravn"/>
+    <Parameter name="environment" value="${env:SERVER_ENV}"/>
+    <Parameter name="suffix" value="${env:SERVER_SUFFIX}"/>
+
+    <!-- qpid + amqp v0.1 -->
+    <Parameter name="java.naming.factory.initial" value="org.apache.qpid.jndi.PropertiesFileInitialContextFactory"/>
+
+    <Parameter name="connectionFactoryNames" value="ConnectionFactory, QueueConnectionFactory, TopicConnectionFactory"/>
+
+    <!-- qpid + amqp v0.1 -->
+    <Parameter name="connectionfactory.ConnectionFactory"
+                value="amqp://admin:admin@clientid/default?brokerlist='tcp://localhost:5672'"/>
+    
+    <!--      
+               value="amqp://transcode/queue?maxprefetch='1'&amp;brokerlist='tcp://amqp.${env:SERVER_ENV}.${env:SERVER_SUFFIX}:5671?ssl='true'&amp;sasl_mechs='ANONYMOUS''"/>
+-->
+    <Parameter name="templateDirectory"
+               value="https://storage.${env:SERVER_ENV}.${env:SERVER_SUFFIX}/static/jobcontract"/>
+
+    <!-- LDAP -->
+    <Parameter name="net.deluxemt.ldap.url" value="ldaps://ldap.${env:SERVER_ENV}.${env:SERVER_SUFFIX}:636"/>
+    <Parameter name="net.deluxemt.ldap.baseDN" value="dc=deluxemt,dc=net"/>
+    <Parameter name="net.deluxemt.ldap.bind.dn" value="cn=Directory Manager"/>
+    <Parameter name="net.deluxemt.ldap.root.password.file" value="/etc/dirsrv/slapd-insight.secret"/>
+
+</Context>

@@ -1,0 +1,36 @@
+<Context path="/${tomcat.instance}" docBase="${tomcat.webapp.docbase}" useHttpOnly="true">
+
+    <!-- qpid + amqp v0.1 -->
+    <Parameter name="java.naming.factory.initial" value="org.apache.qpid.jndi.PropertiesFileInitialContextFactory"/>
+    <Parameter name="connectionFactoryNames" value="ConnectionFactory, QueueConnectionFactory, TopicConnectionFactory"/>
+
+    <!-- Qpid forces us to provide a jndi.properties file, provide a blank one -->
+    <Parameter name="java.naming.provider.url"
+               value="/etc/${tomcat.base}-${tomcat.instance}/Catalina/localhost/${tomcat.instance}-jndi.properties"/>
+
+    <!-- Server to connect to - qpid + amqp v0.1 -->
+    <Parameter name="connectionfactory.ConnectionFactory"
+                value="amqp://admin:admin@clientid/default?brokerlist='tcp://localhost:5672'"/>
+    
+    <!--      
+               value="amqp://transcode/queue?maxprefetch='1'&amp;brokerlist='tcp://amqp.${env:SERVER_ENV}.${env:SERVER_SUFFIX}:5671?ssl='true'&amp;sasl_mechs='ANONYMOUS''"/>
+-->
+
+    <!-- DataPersist -->
+    <Parameter name="environment" value="${env:SERVER_ENV}"/>
+    <Parameter name="suffix" value="${env:SERVER_SUFFIX}"/>
+    <Parameter name="forcedAspect" value=""/>
+
+    <!-- New JobContract -->
+    <Parameter name="numberOfAvailableSlots" value="1"/>
+
+    <!-- New Parameters for job contract -->
+    <Parameter name="queueName" value="notify"/>
+
+    <!-- Java mail settings -->
+    <ResourceLink name="${tomcat.webapp.session.name}"
+                  global="${tomcat.session.name}"
+                  type="javax.mail.Session"/>
+
+</Context>
+

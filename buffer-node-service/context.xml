@@ -1,0 +1,45 @@
+<Context path="/${tomcat.instance}" docBase="${tomcat.webapp.docbase}" useHttpOnly="true">
+
+<!-- qpid + amqp v1.0
+  <Parameter name="java.naming.factory.initial" value="org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory" />
+-->
+<!-- qpid + amqp v0.1 -->
+  <Parameter name="java.naming.factory.initial" value="org.apache.qpid.jndi.PropertiesFileInitialContextFactory" />
+<!-- activemq
+  <Parameter name="java.naming.factory.initial" value="org.apache.activemq.jndi.ActiveMQInitialContextFactory" />
+-->
+  <Parameter name="connectionFactoryNames" value="ConnectionFactory, QueueConnectionFactory, TopicConnectionFactory" />
+
+  <!-- Qpid forces us to provide a jndi.properties file, provide a blank one -->
+<!-- qpid -->
+<!--  
+  <Parameter name="java.naming.provider.url" value="/etc/${tomcat.base}-${tomcat.instance}/Catalina/localhost/${tomcat.instance}-jndi.properties" />
+-->
+  <!-- Server to connect to -->
+<!-- qpid + amqp v1.0
+  <Parameter name="connectionfactory.ConnectionFactory" value="amqps://amqp.${env:SERVER_ENV}.${env:SERVER_SUFFIX}:5672?jms.prefetchPolicy.queuePrefetch=1" />
+-->
+<!-- qpid + amqp v0.1 -->
+    <Parameter name="connectionfactory.ConnectionFactory"
+                value="amqp://admin:admin@clientid/default?brokerlist='tcp://localhost:5672'"/>
+    
+    <!--      
+
+  <Parameter name="connectionfactory.ConnectionFactory" value="amqp://transcode/queue?maxprefetch='1'&amp;brokerlist='tcp://amqp.${env:SERVER_ENV}.${env:SERVER_SUFFIX}:5671?ssl='true'&amp;sasl_mechs='ANONYMOUS''" />
+-->
+
+<!-- activemq
+  <Parameter name="java.naming.provider.url" value="amqp+nio+ssl://amqp.${env:SERVER_ENV}.${env:SERVER_SUFFIX}:5671?jms.prefetchPolicy.queuePrefetch=1" />
+-->
+
+<!-- Set this to an aspect ratio like 4:3 to override aspect ratio for a particular client -->
+<Parameter name="forcedAspect" value=""/>
+
+<Parameter name="queueName" value="buffer" />
+
+<Parameter name="numberOfAvailableSlots" value="1" />
+
+
+</Context>
+
+

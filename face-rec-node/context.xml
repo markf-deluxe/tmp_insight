@@ -1,0 +1,14 @@
+<Context path="/${tomcat.instance}" docBase="${tomcat.webapp.docbase}" useHttpOnly="true">
+  <Parameter name="java.naming.factory.initial" value="org.apache.qpid.jndi.PropertiesFileInitialContextFactory" />
+  <Parameter name="connectionFactoryNames" value="ConnectionFactory, QueueConnectionFactory, TopicConnectionFactory" />
+  <!-- Qpid forces us to provide a jndi.properties file, provide a blank one -->
+  <Parameter name="java.naming.provider.url" value="/etc/${tomcat.base}-${tomcat.instance}/Catalina/localhost/${tomcat.instance}-jndi.properties" />
+    <Parameter name="connectionfactory.ConnectionFactory"
+                value="amqp://admin:admin@clientid/default?brokerlist='tcp://localhost:5672'"/> 
+   <!-- 
+
+  <Parameter name="connectionfactory.ConnectionFactory" value="amqp://transcode/queue?sync_publish='all'&amp;maxprefetch='1'&amp;brokerlist='tcp://amqp.${env:SERVER_ENV}.deluxemt.net:5671?ssl='true'&amp;sasl_mechs='ANONYMOUS''" />
+
+-->
+</Context>
+
